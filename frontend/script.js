@@ -21,6 +21,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Reset quiz to initial state
+function resetQuiz() {
+    // Reset global variables
+    questions = [];
+    currentQuestionIndex = 0;
+    userAnswers = {};
+    userName = '';
+    
+    // Reset UI
+    document.getElementById('userName').value = '';
+    document.getElementById('quizSection').classList.add('hidden');
+    document.getElementById('loadingSection').classList.add('hidden');
+    document.getElementById('loginSection').classList.remove('hidden');
+    
+    // Focus on name input
+    document.getElementById('userName').focus();
+}
+
 // Start the quiz
 async function startQuiz() {
     const nameInput = document.getElementById('userName');
@@ -252,3 +270,6 @@ document.addEventListener('keydown', function(e) {
             break;
     }
 });
+
+// Make resetQuiz available globally for external calls
+window.resetQuiz = resetQuiz;

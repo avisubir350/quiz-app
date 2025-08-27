@@ -52,7 +52,7 @@ services:
       dockerfile: Dockerfile
     container_name: quiz-frontend
     ports:
-      - "80:80"
+      - "8081:80"
     environment:
       - API_BASE_URL=http://localhost:8080
       - PYTHON_SERVICE_URL=http://localhost:5000

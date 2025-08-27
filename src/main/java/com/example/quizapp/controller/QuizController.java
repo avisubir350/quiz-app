@@ -20,8 +20,23 @@ public class QuizController {
     
     @GetMapping("/quiz")
     public ResponseEntity<List<Question>> getQuiz() {
+        // Return randomized quiz instead of all questions
+        List<Question> questions = quizService.getRandomizedQuiz();
+        return ResponseEntity.ok(questions);
+    }
+    
+    @GetMapping("/quiz/all")
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        // Endpoint to get all questions (for admin purposes)
         List<Question> questions = quizService.getAllQuestions();
         return ResponseEntity.ok(questions);
+    }
+    
+    @GetMapping("/quiz/stats")
+    public ResponseEntity<Map<String, Object>> getQuizStats() {
+        // Endpoint to get quiz statistics
+        Map<String, Object> stats = quizService.getQuizStats();
+        return ResponseEntity.ok(stats);
     }
     
     @PostMapping("/submit")

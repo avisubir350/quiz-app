@@ -52,6 +52,11 @@ def generate_feedback(score, total, percentage):
     else:
         return "Keep practicing! Review all the topics and try again."
 
+@app.route('/health')
+def health_check():
+    """Health check endpoint"""
+    return jsonify({'status': 'healthy', 'service': 'result-processing'})
+
 @app.route('/process-result', methods=['POST'])
 def process_result():
     """Process quiz result from Java service"""
@@ -306,7 +311,7 @@ RESULT_TEMPLATE = '''
             </div>
             
             <div class="actions">
-                <a href="/" class="btn">Take Another Quiz</a>
+                <a href="http://localhost:8081" class="btn">Take Another Quiz</a>
                 <a href="#" onclick="window.print()" class="btn">Print Results</a>
             </div>
         </div>
@@ -317,4 +322,4 @@ RESULT_TEMPLATE = '''
 
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)

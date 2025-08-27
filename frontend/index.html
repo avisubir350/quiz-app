@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Application</title>
+    <title>DevOps Quiz Application</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <h1>🧠 Knowledge Quiz</h1>
-            <p>Test your knowledge with our interactive quiz!</p>
+            <h1>🚀 DevOps Knowledge Quiz</h1>
+            <p>Test your DevOps knowledge with our comprehensive quiz!</p>
+            <div class="quiz-info">
+                <span class="info-badge">📚 50+ Questions Pool</span>
+                <span class="info-badge">🎲 20 Random Questions</span>
+                <span class="info-badge">🔀 Shuffled Options</span>
+            </div>
         </header>
 
         <div id="loginSection" class="section">
             <div class="card">
-                <h2>Welcome!</h2>
-                <p>Enter your name to start the quiz:</p>
+                <h2>Welcome to the DevOps Quiz!</h2>
+                <p>Each quiz session presents 20 randomly selected questions from our pool of 50+ DevOps questions.</p>
+                <p>Questions and answer options are shuffled for a unique experience every time!</p>
                 <input type="text" id="userName" placeholder="Your Name" required>
-                <button onclick="startQuiz()" class="btn btn-primary">Start Quiz</button>
+                <button onclick="startQuiz()" class="btn btn-primary">Start Random DevOps Quiz</button>
             </div>
         </div>
 
@@ -45,8 +51,8 @@
         <div id="loadingSection" class="section hidden">
             <div class="card text-center">
                 <div class="spinner"></div>
-                <h2>Processing your results...</h2>
-                <p>Please wait while we calculate your score.</p>
+                <h2>Processing your DevOps results...</h2>
+                <p>Please wait while we calculate your score and generate personalized feedback.</p>
             </div>
         </div>
     </div>
