@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # Java Spring Boot API (Application Tier)
+  quiz-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quiz-api
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:testdb
+      - SPRING_H2_CONSOLE_ENABLED=true
+      - PYTHON_SERVICE_URL=http://python-service:5000
+    networks:
+      - quiz-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Python Flask Service (Results Processing)
+  python-service:
+    build:
+      context: ./python-service
+      dockerfile: Dockerfile
+    container_name: python-service
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - JAVA_API_URL=http://quiz-api:8080
+    networks:
+      - quiz-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+
+  # Frontend (Presentation Tier)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: quiz-frontend
+    ports:
+      - "80:80"
+    environment:
+      - API_BASE_URL=http://localhost:8080
+      - PYTHON_SERVICE_URL=http://localhost:5000
+    networks:
+      - quiz-network
+    depends_on:
+      quiz-api:
+        condition: service_healthy
+      python-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+networks:
+  quiz-network:
+    driver: bridge
+    name: quiz-app-network
+
+volumes:
+  # Volume for H2 database persistence (optional)
+  h2-data:
+    driver: local

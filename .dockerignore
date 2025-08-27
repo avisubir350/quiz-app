@@ -1,0 +1,46 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+SETUP.md
+ARCHITECTURE.md
+PROJECT_OVERVIEW.md
+CONTRIBUTING.md
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+target/
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+logs/
+
+# Frontend files (built separately)
+frontend/
+
+# Python files (built separately)
+python-service/
+
+# Scripts
+*.sh
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
