@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🧠 Knowledge Quiz</h1>
+            <p>Test your knowledge with our interactive quiz!</p>
+        </header>
+
+        <div id="loginSection" class="section">
+            <div class="card">
+                <h2>Welcome!</h2>
+                <p>Enter your name to start the quiz:</p>
+                <input type="text" id="userName" placeholder="Your Name" required>
+                <button onclick="startQuiz()" class="btn btn-primary">Start Quiz</button>
+            </div>
+        </div>
+
+        <div id="quizSection" class="section hidden">
+            <div class="card">
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <div id="questionCounter" class="question-counter"></div>
+                
+                <div id="questionContainer">
+                    <h3 id="questionText"></h3>
+                    <div id="optionsContainer" class="options-container"></div>
+                </div>
+                
+                <div class="quiz-controls">
+                    <button id="prevBtn" onclick="previousQuestion()" class="btn btn-secondary" disabled>Previous</button>
+                    <button id="nextBtn" onclick="nextQuestion()" class="btn btn-primary">Next</button>
+                    <button id="submitBtn" onclick="submitQuiz()" class="btn btn-success hidden">Submit Quiz</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="loadingSection" class="section hidden">
+            <div class="card text-center">
+                <div class="spinner"></div>
+                <h2>Processing your results...</h2>
+                <p>Please wait while we calculate your score.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
